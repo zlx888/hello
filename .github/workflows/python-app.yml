@@ -45,8 +45,7 @@ jobs:
         uses: sayyid5416/pyinstaller@v1
         with:
           python_ver: '3.12'
-          pyinstaller_ver: '==5.13.2'
           spec: 'test_python.py'
           upload_exe_with_name: 'My executable'
-          options: --onefile, --name "My App", --windowed
+          options: --onefile
 
