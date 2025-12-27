@@ -38,36 +38,15 @@ jobs:
     #   run: |
     #     pytest
 
-  build-windows-exe:
-    name: Build Windows EXE
-    runs-on: windows-latest  # 使用 Windows 运行器
-    
-    strategy:
-      matrix:
-        python-version: ['3.9', '3.10', '3.11']  # 支持多个 Python 版本
-    
+  pyinstaller-build:
+    runs-on: <windows-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        # 安装项目依赖
-        pip install -r requirements.txt
-        # 安装 PyInstaller
-        pip install pyinstaller
-        # 可选：安装其他需要的包
-        pip install pywin32
-
-    - name: Verify PyInstaller installation
-      run: pyinstaller --version
+      - name: Create Executable
+        uses: sayyid5416/pyinstaller@v1
+        with:
+          python_ver: '3.12'
+          pyinstaller_ver: '==5.13.2'
+          spec: 'test_python.py'
+          upload_exe_with_name: 'My executable'
+          options: --onefile, --name "My App", --windowed
 
